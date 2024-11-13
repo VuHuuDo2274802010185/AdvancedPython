@@ -7,6 +7,6 @@ def login_required(f):
     def decorated_function(*args, **kwargs):
         if 'logged_in' not in session:
             flash('Bạn cần đăng nhập để tiếp tục!', 'warning')
-            return redirect(url_for('login'))
+            return redirect(url_for('main_routes.login'))
         return f(*args, **kwargs)
     return decorated_function
