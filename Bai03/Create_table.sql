@@ -1,5 +1,0 @@
-CREATE TABLE danhsach (
-    id SERIAL PRIMARY KEY,
-    hoten VARCHAR(255) NOT NULL,
-    diachi VARCHAR(255) NOT NULL
-);
