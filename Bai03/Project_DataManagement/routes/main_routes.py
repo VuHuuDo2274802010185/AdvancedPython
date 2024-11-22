@@ -16,7 +16,7 @@ def index():
                 cur.execute('SELECT * FROM danhsach')
                 rows = cur.fetchall()
         except Exception as e:
-            flash(f'Database query error: {e}', 'danger')
+            flash(f'Lỗi truy vấn cơ sở dữ liệu: {e}', 'danger')
         finally:
             conn.close()
     else:
@@ -29,9 +29,9 @@ def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        
+
         # Cần cập nhật xác thực thật
-        if username == 'admin' and password == '1234':  
+        if authenticate_user(username, password):  # Gọi hàm xác thực
             session['logged_in'] = True
             flash('Đăng nhập thành công!', 'success')
             return redirect(url_for('main_routes.index'))
@@ -39,6 +39,10 @@ def login():
             flash('Tên đăng nhập hoặc mật khẩu không đúng!', 'danger')
     
     return render_template('login.html')
+
+def authenticate_user(username, password):
+    """Xác thực người dùng."""
+    return username == 'admin' and password == '1234'
 
 @main_routes.route('/logout')
 @login_required

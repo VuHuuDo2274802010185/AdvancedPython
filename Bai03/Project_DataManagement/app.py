@@ -15,20 +15,28 @@ app.register_blueprint(crud_routes)
 
 def run_app():
     """Chạy ứng dụng Flask."""
-    app.run(debug=True, use_reloader=False)
+    try:
+        app.run(debug=True, use_reloader=False)
+    except Exception as e:
+        print(f"Lỗi khi chạy ứng dụng Flask: {e}")
 
 def open_browser():
-    """Mở trình duyệt web với URL ứng dụng."""
+    """Mở trình duyệt web với URL của ứng dụng."""
     time.sleep(1)  # Đảm bảo ứng dụng đã khởi động trước khi mở trình duyệt
     webbrowser.open_new('http://127.0.0.1:5000/')
 
 if __name__ == '__main__':
     # Tạo và bắt đầu luồng cho ứng dụng Flask
-    threading.Thread(target=run_app).start()
+    flask_thread = threading.Thread(target=run_app)
+    flask_thread.start()
     
     # Mở trình duyệt trong một luồng riêng
-    threading.Thread(target=open_browser).start()
+    browser_thread = threading.Thread(target=open_browser)
+    browser_thread.start()
 
-    # Giữ cho chương trình chạy liên tục
-    while True:
-        time.sleep(1)
+    # Giữ cho luồng chính chạy liên tục
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        print("Đang tắt ứng dụng.")

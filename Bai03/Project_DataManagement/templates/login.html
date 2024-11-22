@@ -10,6 +10,7 @@
 
 <div class="container mt-5">
     <h2 class="text-center">Đăng Nhập</h2>
+    
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div class="container">
@@ -36,6 +37,10 @@
         </div>
         <button type="submit" class="btn btn-primary">Đăng Nhập</button>
     </form>
+    
+    <div class="text-center mt-3">
+        <a href="{{ url_for('main_routes.index') }}">Quay lại trang chính</a>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

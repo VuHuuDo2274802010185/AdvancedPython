@@ -1,10 +1,10 @@
 import psycopg2
-from config import DATABASE
+from config import get_database_uri
 
 def get_db_connection():
     """Tạo kết nối đến cơ sở dữ liệu PostgreSQL."""
     try:
-        connection = psycopg2.connect(**DATABASE)
+        connection = psycopg2.connect(get_database_uri())
         print("Database connection established.")
         return connection
     except psycopg2.OperationalError as e:

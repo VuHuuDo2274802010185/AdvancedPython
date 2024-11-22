@@ -65,6 +65,7 @@ def edit(id):
                 if not hoten or not diachi:
                     flash('Họ tên và địa chỉ không được để trống!', 'danger')
                     return redirect(url_for('crud_routes.edit', id=id))
+                
                 with conn.cursor() as cur:
                     cur.execute('UPDATE danhsach SET hoten = %s, diachi = %s WHERE id = %s', (hoten, diachi, id))
                 conn.commit()
